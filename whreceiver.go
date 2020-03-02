@@ -27,15 +27,15 @@ func main() {
 		}
 		switch payload.(type) {
 
-		case github.ReleasePayload:
-			release := payload.(github.ReleasePayload)
+		case github.CreatePayload:
+			createRef := payload.(github.CreatePayload)
 			// Do whatever you want from here...
-			fmt.Printf("%+v", release)
+			fmt.Printf("%+v", createRef)
 
-		case github.PullRequestPayload:
-			pullRequest := payload.(github.PullRequestPayload)
+		case github.DeletePayload:
+			deleteRef := payload.(github.DeletePayload)
 			// Do whatever you want from here...
-			fmt.Printf("%+v", pullRequest)
+			fmt.Printf("%+v", deleteRef)
 
 		case github.PushPayload:
 			push := payload.(github.PushPayload)
