@@ -21,10 +21,8 @@ func main() {
 		if err != nil {
 			http.Error(w, fmt.Sprint(err), http.StatusInternalServerError)
 			return
-		} else {
-      fmt.Printf("%+v", dump)
     }
-		//fmt.Printf("%+v", r)
+    fmt.Printf("%+v", dump)
 		payload, err := hook.Parse(r, github.ReleaseEvent, github.PullRequestEvent, github.PushEvent)
 		if err != nil {
 			if err == github.ErrEventNotFound {
