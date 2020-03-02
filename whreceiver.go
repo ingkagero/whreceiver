@@ -4,6 +4,7 @@ import (
 	"fmt"
   "os"
 	"net/http"
+	"net/http/httputil"
 
 	"gopkg.in/go-playground/webhooks.v5/github"
 )
@@ -16,6 +17,13 @@ func main() {
 	hook, _ := github.New(github.Options.Secret("SomeSecret"))
 
 	http.HandleFunc(path, func(w http.ResponseWriter, r *http.Request) {
+    dump, err := httputil.DumpRequest(r, true)
+		if err != nil {
+			http.Error(w, fmt.Sprint(err), http.StatusInternalServerError)
+			return
+		} else {
+      fmt.Printf("%+v", dump)
+    }
 		//fmt.Printf("%+v", r)
 		payload, err := hook.Parse(r, github.ReleaseEvent, github.PullRequestEvent, github.PushEvent)
 		if err != nil {
@@ -30,11 +38,13 @@ func main() {
 		case github.CreatePayload:
 			createRef := payload.(github.CreatePayload)
 			// Do whatever you want from here...
+			fmt.Println("create payload")
 			fmt.Printf("%+v", createRef)
 
 		case github.DeletePayload:
 			deleteRef := payload.(github.DeletePayload)
 			// Do whatever you want from here...
+			fmt.Println("delete payload")
 			fmt.Printf("%+v", deleteRef)
 
 		case github.PushPayload:
