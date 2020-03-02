@@ -16,6 +16,7 @@ RUN env GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o /whreceiver -a -ldflag
 # STEP 2 build a small image
 ############################
 FROM scratch
+ENV PORT=8080
 # Copy our static executable.
 COPY --from=builder /whreceiver /whreceiver
 # Run the hello binary.
