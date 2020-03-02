@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-  "os"
 	"net/http"
+	"os"
 
 	"gopkg.in/go-playground/webhooks.v5/github"
 )
@@ -30,11 +30,13 @@ func main() {
 		case github.CreatePayload:
 			createRef := payload.(github.CreatePayload)
 			// Do whatever you want from here...
+			fmt.Println("create payload")
 			fmt.Printf("%+v", createRef)
 
 		case github.DeletePayload:
 			deleteRef := payload.(github.DeletePayload)
 			// Do whatever you want from here...
+			fmt.Println("delete payload")
 			fmt.Printf("%+v", deleteRef)
 
 		case github.PushPayload:
