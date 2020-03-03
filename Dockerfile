@@ -20,4 +20,3 @@ FROM scratch
 COPY --from=builder /whreceiver /whreceiver
 # Run the hello binary.
 ENTRYPOINT ["/whreceiver"]
-
